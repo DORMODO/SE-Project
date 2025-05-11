@@ -7,6 +7,7 @@ class User implements PlateFormUser
     private string $name;
     private string $email;
     private string $password;
+    private string $userType;
     private bool   $loggedIn = false;
 
     // public function __construct(string $userId, string $name, string $email, string $password)
@@ -14,6 +15,7 @@ class User implements PlateFormUser
     //     $this->userId   = $userId;
     //     $this->name     = $name;
     //     $this->email    = $email;
+    //     $this->userType = $userType;
     //     $this->password = $password;
     // }
 
@@ -91,5 +93,13 @@ class User implements PlateFormUser
     public function setLoggedIn(bool $flag): void
     {
         $this->loggedIn = $flag;
+    }
+    public function getUserType(): string
+    {
+        return $this->userType;
+    }
+    public function setUserType(string $userType): void
+    {
+        $this->userType = $userType;
     }
 }

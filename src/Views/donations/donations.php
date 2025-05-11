@@ -1,5 +1,6 @@
 <?php
 // add donation to database
+//change 
 include_once '../../Controllers/DBControllor.php';
 $database = new DBController();
 $database->dbName = 'charity_db';

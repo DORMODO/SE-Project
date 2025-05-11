@@ -2,11 +2,14 @@
 // add donation to database
 //change 
 include_once '../../Controllers/DBControllor.php';
+
 $database = new DBController();
 $database->dbName = 'charity_db';
 if($database->openConnection()){
   echo("connected well!");
-}else{
+}
+else
+{
   echo("محمد مش عملها");
 }
 

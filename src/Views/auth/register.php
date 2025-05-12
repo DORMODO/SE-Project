@@ -1,35 +1,45 @@
-<?php
-include_once '../../Modules/Admin.php';
+<?php  
+include_once '../../Modules/User.php';  
+include_once '../../Controllers/AuthController.php';  
+if (session_status() === PHP_SESSION_NONE) {  
+    session_start();  
+}  
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_POST['action'])) {
-    if ($_POST['action'] === 'add') {
+$err_msg = "";  
 
+if (
+    !empty($_POST['username']) &&
+    !empty($_POST['email']) &&
+    !empty($_POST['password']) &&
+    !empty($_POST['userType'])
+) {  
+    $user = new User();  
+    $user->setEmail($_POST['email']);  
+    $user->setPassword($_POST['password']);  
+    $user->setName($_POST['username']);  
+    $user->($_POST['userType']);
+    $auth = new AuthController();  
 
-
-      // Add user logic (already implemented)
-      if (isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['terms'])) {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $admin = new Admin();
-        $admin->addUser($username, $email, $password);
-      } else {
-        echo '<script>alert("Please fill all fields and agree to the terms.");</script>';
-      }
-    } else if ($_POST['action'] === 'delete') {
-      // Delete user logic
-      if (isset($_POST['username'])) {
-        $username = $_POST['username'];
-        $admin = new Admin();
-        $admin->deleteUser($username);
-      } else {
-        echo '<script>alert("Please provide a username to delete.");</script>';
-      }
-    }
-  }
-}
+    if ($auth->register($user)) {  
+        if ($_SESSION['userRole'] == "donor") {   
+            header("Location: /charity-management-system/Views/donations/donations.php");   
+        } else if ($_SESSION['userRole'] == "volunteer") {   
+            header("Location: /charity-management-system/Views/volunteer/index.php");   
+        } else {   
+            header("Location: /charity-management-system/Views/charity/index.php");   
+        }
+        exit;
+    } else {  
+        $err_msg = "Registration failed.";   
+    }  
+} else if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
+    $err_msg = "Please fill in all fields.";  
+}  
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html
@@ -131,6 +141,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                     aria-describedby="password" />
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  <select name="userType" required>
+                  <option value="">Select user type</option>
+                  <option value="donor">Donor</option>
+                  <option value="volunteer">Volunteer</option>
+                </select>
                 </div>
               </div>
 

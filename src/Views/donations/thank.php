@@ -43,7 +43,7 @@
     <h2 class="thank-title">Thank You!</h2>
     <p>Your generous donation helps us continue our mission.<br>
       We truly appreciate your support.</p>
-    <a href="/charity-management-system/src/view/" class="btn btn-success mt-3">Back to Home</a>
+    <a href="/charity-management-system/src/views/" class="btn btn-success mt-3">Back to Home</a>
   </div>
 </body>
 

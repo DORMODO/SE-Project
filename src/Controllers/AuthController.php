@@ -51,7 +51,21 @@ class AuthController
             return false; 
         } 
     } 
+    public function checkForUser($email) { 
+        $query = "SELECT * FROM user WHERE email = '".$email."'"; 
+        $result = $this->db->select($query); 
 
+        if (is_array($result)) { 
+            if (count($result) > 0) { 
+                return true; 
+            } else { 
+                return false; 
+            } 
+        } else { 
+            $_SESSION['err_msg'] = "Query execution failed."; 
+            return false; 
+        } 
+    }
     // public function __destruct() {
     //     $this->db->closeConnection();
     // }

@@ -127,6 +127,47 @@
     .social-icons a:hover {
       color: var(--accent-color);
     }
+
+    .floating-donate {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+
+    .floating-donate .btn {
+      width: 160px;
+      height: 60px;
+      border-radius: 30px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(45, 106, 79, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .floating-donate .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(45, 106, 79, 0.5);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 
@@ -140,8 +181,8 @@
           <h1 class="display-4 fw-bold mb-3">Empower Change, One Donation at a Time</h1>
           <p class="lead mb-4">Join us in making a difference. Together we can create positive change and build a better future for those in need.</p>
           <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-            <a href="donations/donate.php" class="btn btn-primary btn-lg px-4 gap-3">Donate Now</a>
-            <a href="auth/register.php" class="btn btn-outline-light btn-lg px-4">Join as Volunteer</a>
+            <a href="pages/become-donor.php" class="btn btn-primary btn-lg px-4 gap-3">Become a Donor</a>
+            <a href="pages/become-volunteer.php" class="btn btn-outline-light btn-lg px-4">Join as Volunteer</a>
           </div>
         </div>
       </div>
@@ -337,15 +378,15 @@
           <h2 class="fw-bold mb-4">Ready to Make a Difference?</h2>
           <p class="lead mb-4">Join our community of donors and volunteers to create positive change.</p>
           <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-            <a href="donations/donate.php" class="btn btn-primary btn-lg px-5">Become a Donor</a>
-            <a href="auth/register.php" class="btn btn-outline-light btn-lg px-5">Volunteer Today</a>
+            <a href="pages/become-donor.php" class="btn btn-primary btn-lg px-5">Become a Donor</a>
+            <a href="pages/become-volunteer.php" class="btn btn-outline-light btn-lg px-5">Volunteer Today</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section-padding bg-light">
+  <section class="section-padding bg-light" id="portals">
     <div class="container">
       <div class="row mb-4">
         <div class="col-lg-8 mx-auto text-center">
@@ -355,7 +396,7 @@
       </div>
       <div class="row g-4 justify-content-center">
         <div class="col-md-3">
-          <a href="auth/login.php?role=admin" class="text-decoration-none">
+          <a href="./pages/admin.php" class="text-decoration-none">
             <div class="card text-center h-100">
               <div class="card-body">
                 <i class="bi bi-person-workspace display-4 text-primary mb-3"></i>
@@ -365,7 +406,7 @@
           </a>
         </div>
         <div class="col-md-3">
-          <a href="auth/login.php?role=donor" class="text-decoration-none">
+          <a href="./pages/dashboard.php" class="text-decoration-none">
             <div class="card text-center h-100">
               <div class="card-body">
                 <i class="bi bi-heart display-4 text-primary mb-3"></i>
@@ -375,7 +416,7 @@
           </a>
         </div>
         <div class="col-md-3">
-          <a href="auth/login.php?role=volunteer" class="text-decoration-none">
+          <a href="./pages/volunteerPortal.php" class="text-decoration-none">
             <div class="card text-center h-100">
               <div class="card-body">
                 <i class="bi bi-people display-4 text-primary mb-3"></i>
@@ -385,7 +426,7 @@
           </a>
         </div>
         <div class="col-md-3">
-          <a href="auth/login.php?role=manager" class="text-decoration-none">
+          <a href="./pages/eventMangerPortal.php" class="text-decoration-none">
             <div class="card text-center h-100">
               <div class="card-body">
                 <i class="bi bi-calendar-event display-4 text-primary mb-3"></i>
@@ -397,6 +438,13 @@
       </div>
     </div>
   </section>
+
+  <div class="floating-donate">
+    <a href="donations/donate.php" class="btn btn-primary">
+      <i class="bi bi-heart-fill"></i>
+      Donate
+    </a>
+  </div>
 
   <?php include_once './assets/components/footer.php'; ?>
 

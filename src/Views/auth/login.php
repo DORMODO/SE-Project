@@ -4,7 +4,7 @@ $err_msg = "";
 
 if (isset($_POST['email-username']) && isset($_POST['password'])) {
     if (!empty($_POST['email-username']) && !empty($_POST['password'])) {
-        $user = new User;
+        $user = new User();
         $user->setEmail($_POST['email-username']);
         $user->setPassword($_POST['password']);
 

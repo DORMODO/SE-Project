@@ -17,7 +17,7 @@ class Admin extends User
     {
 
         if ($this->db->openConnection()) {
-            $query = "INSERT INTO user (userId,name,password,userType, email) VALUES ('$userId', '$name', '$password', '$userType', '$email')";
+            $query = "INSERT INTO user (user_Id,name,password,user_Type, email) VALUES ('$userId', '$name', '$password', '$userType', '$email')";
 
             if ($this->db->connection->query($query) === TRUE) {
                 echo '<script>alert("User added successfully!");</script>';
@@ -63,14 +63,14 @@ class Admin extends User
         return false;
     }
 
-    public function generateReport(string $format): Report // not yet implemented
+    public function generateReport(string $format): bool 
     {
         if ($format === 'pdf') {
         } elseif ($format === 'excel') {
             // Generate Excel report
         }
 
-        return new Report('', '', new \DateTime());
+        return true;
     }
     public function setScheduleReporting(\DateTime $date, string $reportType): bool
     {
@@ -109,32 +109,48 @@ class Admin extends User
 
         return [];
     }
-    public function viewUser(string $userId): ?array
+    public function viewUsers(string $userName): ?array
     {
         if ($this->db->openConnection()) {
-            $query = "SELECT * FROM user WHERE userId = '$userId'";
+            $query = "SELECT * FROM user WHERE name = '$userName'";
             $result = $this->db->connection->query($query);
-            if ($result->num_rows > 0) {
-                return $result[0];
-            }
+
+            return $result->fetch_assoc();
         }
         return null;
     }
 
     public function viewDonationRecords(): array
-    { /* TODO */
+    {
+        if ($this->db->openConnection()) {
+            $query = "SELECT * FROM donations";
+            $result = $this->db->connection->query($query);
+            $donations = [];
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $donations[] = $row;
+                }
+            }
+            return $donations;
+        }
+
         return [];
     }
-    public function verifyDonation(string $donationID): bool
+
+    public function verifyDonation(string $donationID): bool // not yet
+    { 
+
+
+        return false;
+    }
+
+    public function verifyPayment(string $paymentID): bool // not yet
     { /* TODO */
         return false;
     }
-    public function verifyPayment(string $paymentID): bool
-    { /* TODO */
-        return false;
-    }
+
     public function trackDonation(string $donationId): ?Donation
-    { /* TODO */
+    { 
         return null;
     }
     public function refundDonation(string $donationId): bool

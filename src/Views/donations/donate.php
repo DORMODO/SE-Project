@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
+  <?php include_once '../assets/components/navbar.php'; ?>
 
   <div class="donation-form">
     <h2 class="text-center text-success">Make a Donation</h2>
@@ -116,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     </form>
   </div>
-
+  <?php include_once '../assets/components/footer.php'; ?>
 </body>
 
 </html>

@@ -1,7 +1,6 @@
 <?php
 include_once '../../Modules/User.php';     
 include_once '../../Controllers/AuthController.php';     
-
 $err_msg = "";     
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,13 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();     
         } 
 
-        $user = new User(
-            ,
-            $_POST['username'],
-            $_POST['email'],
-            password_hash($_POST['password'], PASSWORD_DEFAULT),
-            $_POST['userType']
-        );
+        $user = new User();
+        $user->setName($_POST['username']); 
+        $user->setEmail($_POST['email']);
+        $user->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
+        $user->setUserType($_POST['userType']);
 
         $auth = new AuthController();  
 
@@ -34,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($_SESSION['userType'] == "donor") {     
                     header("Location: ../donations/donations.php");     
                     exit; 
-                } elseif ($_SESSION['userType'] == "volunteer") {     
+                } else if ($_SESSION['userType'] == "volunteer") {     
                     header("Location: ../");     
                     exit; 
                 } else {     

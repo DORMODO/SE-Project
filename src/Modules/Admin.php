@@ -93,8 +93,9 @@ class Admin extends User
         }
         return false;
     }
-    public function viewLogs(): array
-    {
+    public function viewLogs(): array 
+    { 
+        
 
         return [];
     }

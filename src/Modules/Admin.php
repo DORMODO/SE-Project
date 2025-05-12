@@ -93,12 +93,34 @@ class Admin extends User
         }
         return false;
     }
-    public function viewLogs(): array 
-    { 
-        
+    public function viewLogs(): array
+    {
+        if ($this->db->openConnection()) {
+            $query = "SELECT * FROM user";
+            $result = $this->db->connection->query($query);
+            $logs = [];
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $logs[] = $row;
+                }
+            }
+            return $logs;
+        }
 
         return [];
     }
+    public function viewUser(string $userId): ?array
+    {
+        if ($this->db->openConnection()) {
+            $query = "SELECT * FROM user WHERE userId = '$userId'";
+            $result = $this->db->connection->query($query);
+            if ($result->num_rows > 0) {
+                return $result[0];
+            }
+        }
+        return null;
+    }
+
     public function viewDonationRecords(): array
     { /* TODO */
         return [];

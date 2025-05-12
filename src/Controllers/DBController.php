@@ -32,7 +32,7 @@ class DBController
         }
     }
     public function select($query)
-    {  // this method
+    {
         $result = $this->connection->query($query);
         if ($result === TRUE) {
             $result->fetch_all(MYSQLI_ASSOC);

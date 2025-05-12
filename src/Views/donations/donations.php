@@ -1,20 +1,32 @@
 <?php
-// You can handle form submission here if needed
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = $_POST["donorName"];
-  $email = $_POST["donorEmail"];
-  $amount = $_POST["donationAmount"];
-  $paymentMethod = $_POST["paymentMethod"];
-  $message = $_POST["message"];
+// add donation to database
+include_once '../../controllers/DBControllor.php';
 
-  // Process the donation (e.g., save to database, send email, etc.)
-  // For demonstration, we'll just echo the values
-  echo "<div class='alert alert-success' role='alert'>";
-  echo "Thank you, $name!<br>";
-  echo "We have received your donation of $$amount.<br>";
-  echo "Payment Method: $paymentMethod<br>";
-  echo "Message: $message<br>";
-  echo "</div>";
+$database = new DBController();
+$database->dbName = 'charity_db';
+if($database->openConnection()){
+  echo("connected well!");
+}else{
+  echo("محمد مش عملها");
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $donorName = $_POST['donorName'];
+    echo '<script>alert("Donation recorded successfully!");</script>';
+  
+  $donorEmail = $_POST['donorEmail'];
+  $donationAmount = $_POST['donationAmount'];
+  $paymentMethod = $_POST['paymentMethod'];
+  $message = $_POST['message'];
+
+  // Insert donation into the database
+  $query = "INSERT INTO donations (name, email, amount, payment_method, message) VALUES ('$donorName', '$donorEmail', '$donationAmount', '$paymentMethod', '$message')";
+
+  if ($database->connection->query($query) === TRUE) {
+    echo '<script>alert("Donation recorded successfully!");</script>';
+  } else {
+    echo '<script>alert("Error: ' . $database->connection->error . '");</script>';
+  }
 }
 ?>
 

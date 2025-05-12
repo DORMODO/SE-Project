@@ -10,14 +10,6 @@ class User implements PlateFormUser
     private string $userType;
     private bool   $loggedIn = false;
 
-    public function __construct(string $userId, string $name, string $email, string $userType, string $password)
-    {
-        $this->userId   = $userId;
-        $this->name     = $name;
-        $this->email    = $email;
-        $this->userType = $userType;
-        $this->password = $password;
-    }
 
     public function login(string $userName, string $password): bool
     {

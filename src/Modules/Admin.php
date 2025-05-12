@@ -1,10 +1,10 @@
 <?php
 // to include User we write 
 include_once 'User.php';
-include '../Controllers/DBController.php';
+include __DIR__ . '/../Controllers/DBController.php';
 class Admin extends User
 {
-    public $db; 
+    public $db;
 
     public function __construct()
     {
@@ -12,12 +12,12 @@ class Admin extends User
         $this->db = new DBController();
     }
 
-    public function addUser($username, $email, $password): bool
+    public function addUser($userId, $name,  $password, $userType, $email): bool
     {
 
         // Check if the connection is established
         if ($this->db->openConnection()) {
-            $query = "INSERT INTO user (name, email, password) VALUES ('$username', '$email', '$password')";
+            $query = "INSERT INTO user (userId,name,password,userType, email) VALUES ('$userId', '$name', '$password', '$userType', '$email')";
 
             if ($this->db->connection->query($query) === TRUE) {
                 echo '<script>alert("User added successfully!");</script>';
@@ -30,24 +30,22 @@ class Admin extends User
         return false;
     }
 
+
     public function deleteUser($username): bool
     {
-        if ($this->db->connection === null) {
-            $this->db->connection = new mysqli('localhost', 'root', '', 'OmarTest');
-        }
-        if ($this->db->connection->connect_error) {
-            die('Error in Connection: ' . $this->db->connection->connect_error);
-        }
+        // Check if the connection is established
+        if ($this->db->openConnection()) {
+            $query = "DELETE FROM user WHERE name = '$username'";
 
-        $query = "DELETE FROM user WHERE name = '$username'";
-
-        if ($this->db->connection->query($query) === TRUE) {
-            echo '<script>alert("User deleted successfully!");</script>';
-            return true;
-        } else {
-            echo '<script>alert("Error: ' . $this->db->connection->error . '");</script>';
-            return false;
+            if ($this->db->connection->query($query) === TRUE) {
+                echo '<script>alert("User deleted successfully!");</script>';
+                return true;
+            } else {
+                echo '<script>alert("Error: ' . $this->db->connection->error . '");</script>';
+                return false;
+            }
         }
+        return false;
     }
 
     public function editUser(string $userId): bool

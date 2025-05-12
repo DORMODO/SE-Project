@@ -34,11 +34,20 @@ class DBController
     public function select($query)
     {
         $result = $this->connection->query($query);
+        if ($result) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            echo "Error: " . $this->connection->error;
+            return false;
+        }
+    }
+    public function insert($query)
+    {
+        $result = $this->connection->query($query);
         if ($result === TRUE) {
-            $result->fetch_all(MYSQLI_ASSOC);
             return true;
         } else {
-            echo "Error: " . mysqli_error($this->connection);
+            echo "Error: " . $this->connection->error;
             return false;
         }
     }

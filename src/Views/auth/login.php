@@ -1,21 +1,34 @@
 <?php
-require_once "../../Controllers/AuthController.php";
-require_once "../../Models/User.php";
-if(isset($_POST['email']) && isset($_POST['password'])){
-  if(!empty($_POST['email']) && !empty($_POST['password'])){
-    // $user = new User;
-    // $user->setEmail($_POST['email']);
-    // $user->setPassword($_POST['password']);
-    $auth = new AuthController;
-    $auth->login($user);
+session_start();
+$err_msg = "";
 
-  }
-  else {
+if (isset($_POST['email-username']) && isset($_POST['password'])) {
+    if (!empty($_POST['email-username']) && !empty($_POST['password'])) {
+        $user = new User;
+        $user->setEmail($_POST['email-username']);
+        $user->setPassword($_POST['password']);
 
-  }
+        $auth = new AuthController;
+        if (!$auth->login($user)) {
+            $err_msg = $_SESSION['err_msg'];
+        } else {
+            if ($_SESSION['userType'] == "admin") {
+                header("Location: ../../Views/admin/index.php");
+            } else if ($_SESSION['userType'] == "donor") {
+                header("Location: ../../Views/donations/donations.php");
+            } else if ($_SESSION['userType'] == "volunteer") {
+                header("Location: ../../Views/volunteer/index.php");
+            } else {
+                header("Location: ../../Views/charity/index.php");
+            }
+            exit;
+        }
+    } else {
+        $err_msg = "Please fill in all fields";
+    }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 
@@ -201,6 +214,16 @@ if(isset($_POST['email']) && isset($_POST['password'])){
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+              <?php
+                if($err_msg != ""){
+                  ?>
+                  <div class="alert alert-danger alert-dismissible" role="alert">
+                        <?php echo $err_msg; ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                  <?php
+                }
+              ?>
               <p class="mb-4">
                 Please sign-in to your account and start the adventure
               </p>

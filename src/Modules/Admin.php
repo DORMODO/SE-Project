@@ -1,5 +1,7 @@
 <?php
-// to include User we write 
+
+use DateTime;
+
 include_once 'User.php';
 include __DIR__ . '/../Controllers/DBController.php';
 class Admin extends User
@@ -8,14 +10,12 @@ class Admin extends User
 
     public function __construct()
     {
-        // Initialize the DBController instance in the constructor
         $this->db = new DBController();
     }
 
     public function addUser($userId, $name,  $password, $userType, $email): bool
     {
 
-        // Check if the connection is established
         if ($this->db->openConnection()) {
             $query = "INSERT INTO user (userId,name,password,userType, email) VALUES ('$userId', '$name', '$password', '$userType', '$email')";
 
@@ -33,7 +33,6 @@ class Admin extends User
 
     public function deleteUser($username): bool
     {
-        // Check if the connection is established
         if ($this->db->openConnection()) {
             $query = "DELETE FROM user WHERE name = '$username'";
 
@@ -48,24 +47,56 @@ class Admin extends User
         return false;
     }
 
-    public function editUser(string $userId): bool
-    { /* TODO */
+    public function editUser(string $userId, string $name, string $password, string $email): bool
+    {
+        if ($this->db->openConnection()) {
+            $query = "UPDATE user SET name = '$name', password = '$password', email = '$email' WHERE userId = '$userId'";
+
+            if ($this->db->connection->query($query) === TRUE) {
+                echo '<script>alert("User updated successfully!");</script>';
+                return true;
+            } else {
+                echo '<script>alert("Error: ' . $this->db->connection->error . '");</script>';
+                return false;
+            }
+        }
         return false;
     }
-    public function generateReport(string $format): Report
-    { /* TODO */
+
+    public function generateReport(string $format): Report // not yet implemented
+    {
+        if ($format === 'pdf') {
+        } elseif ($format === 'excel') {
+            // Generate Excel report
+        }
+
         return new Report('', '', new \DateTime());
     }
     public function setScheduleReporting(\DateTime $date, string $reportType): bool
-    { /* TODO */
+    {
+
         return false;
     }
-    public function assignTask(string $volId, string $taskId): bool
-    { /* TODO */
+    public function assignTask(string $task_Id, string $campaign_Id, string $description, DateTime $due_date): bool
+    {
+
+        if ($this->db->openConnection()) {
+            $query = "INSERT INTO task (task_Id,campaign_Id,description,due_date) VALUES ('$task_Id', '$campaign_Id', '$description',  '$due_date')";
+
+            if ($this->db->connection->query($query) === TRUE) {
+                echo '<script>alert("Task added successfully!");</script>';
+                return true;
+            } else {
+                echo '<script>alert("Error: ' . $this->db->connection->error . '");</script>';
+                return false;
+            }
+        }
         return false;
     }
-    public function viewLogs(): array
-    { /* TODO */
+    public function viewLogs(): array 
+    { 
+        
+
         return [];
     }
     public function viewDonationRecords(): array

@@ -406,7 +406,7 @@
           </a>
         </div>
         <div class="col-md-3">
-          <a href="./pages/dashboard.php" class="text-decoration-none">
+          <a href="./pages/donor-dashboard.php" class="text-decoration-none">
             <div class="card text-center h-100">
               <div class="card-body">
                 <i class="bi bi-heart display-4 text-primary mb-3"></i>
@@ -416,7 +416,7 @@
           </a>
         </div>
         <div class="col-md-3">
-          <a href="./pages/volunteerPortal.php" class="text-decoration-none">
+          <a href="./pages/volunteer.php" class="text-decoration-none">
             <div class="card text-center h-100">
               <div class="card-body">
                 <i class="bi bi-people display-4 text-primary mb-3"></i>

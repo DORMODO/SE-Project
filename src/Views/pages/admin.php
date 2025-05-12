@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary: #007bff;
-            --primary-dark: #0069d9;
+            --primary: #1b4332;
+            --primary-dark:rgb(3, 56, 36);
             --secondary: #6c757d;
             --success: #28a745;
             --danger: #dc3545;

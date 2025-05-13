@@ -162,11 +162,11 @@ class Admin extends User
         return false;
     }
 
-    public function createNotification(int $userId, string $message): bool
+    public function createNotification($notification_Id, $recipient_Id, $date, $message): bool
     {
         if ($this->db->openConnection()) {
-            $query = "INSERT INTO notifications (userId, message, isRead, createdAt) 
-                      VALUES ('$userId', '$message', 0, NOW())";
+            $query = "INSERT INTO notifications (notification_Id, recipient_Id,date ,message ) 
+                      VALUES ('$notification_Id', '$recipient_Id', '$date', '$message'";
 
             if ($this->db->connection->query($query) === TRUE) {
                 return true;
@@ -177,17 +177,16 @@ class Admin extends User
         }
         return false;
     }
-   
-    public function makeDonation(int $userId, float $amount): bool
+
+    public function makeDonation($id, $donor_name, $email, $phone_number, $amount, $donation_type, $payment_method, $message, $donation_date, $donor_id, $guest_id, $campaign_id): bool
     {
         if ($this->db->openConnection()) {
-            $query = "INSERT INTO donations (userId, amount, createdAt) 
-                      VALUES ('$id', '$donor_name','$email','$amount','$amount', NOW())";
+            $query = "INSERT INTO donations (id,donor_name	,email,	phone_number,	amount	,donation_type,	payment_method,	message	,donation_date	,donor_id	,guest_id,	campaign_id	) 
+                      VALUES ('$id', '$donor_name','$email','$phone_number','$amount','$donation_type','$payment_method','$message', '$donation_date', '$donor_id','$guest_id','$campaign_id'";
 
             if ($this->db->connection->query($query) === TRUE) {
-                // Create a notification for the donor
                 $message = "Thank you for your donation of $$amount!";
-                $this->createNotification($userId, $message);
+                $this->createNotification(1, $id, $donation_date, $message);
 
                 echo '<script>alert("Donation successful!");</script>';
                 return true;
@@ -212,14 +211,6 @@ class Admin extends User
             return $notifications;
         }
         return [];
-    }
-    public function markNotificationAsRead(int $notificationId): bool
-    {
-        if ($this->db->openConnection()) {
-            $query = "UPDATE notifications SET isRead = 1 WHERE notificationId = '$notificationId'";
-            return $this->db->connection->query($query) === TRUE;
-        }
-        return false;
     }
 }
 

@@ -22,7 +22,6 @@
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background-color: var(--gray-light);
       padding-top: 70px;
-      /* Add padding to account for fixed navbar */
     }
 
     .navbar {
@@ -56,7 +55,6 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: url('../assets/img/elements/18.jpg') right center;
       opacity: 0.1;
       background-size: cover;
     }
@@ -149,7 +147,7 @@
 </head>
 
 <body>
-  <!-- Navigation Bar -->
+  <!-- Navbar -->
   <?php include_once '../assets/components/navbar.php'; ?>
 
   <!-- Main Content -->
@@ -356,23 +354,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="footer border-top">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-          <p class="mb-0">&copy; 2025 Charity Management System. All rights reserved.</p>
-        </div>
-        <div class="col-md-6 text-center text-md-end">
-          <div class="social-links">
-            <a href="#"><i class="bi bi-facebook"></i></a>
-            <a href="#"><i class="bi bi-twitter"></i></a>
-            <a href="#"><i class="bi bi-instagram"></i></a>
-            <a href="#"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+   <?php include_once '../assets/components/footer.php'; ?>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

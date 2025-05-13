@@ -307,6 +307,42 @@
           </div>
         </div>
 
+        <!-- Notifications Panel -->
+        <div class="card mb-4">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0"><i class="bi bi-bell me-2"></i>Notifications</h5>
+            <span class="badge bg-primary rounded-pill">3</span>
+          </div>
+          <div class="card-body p-0">
+            <div class="list-group list-group-flush">
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Donation Successful</h6>
+                  <small class="text-muted">3 days ago</small>
+                </div>
+                <p class="mb-1">Your donation of $500 to Education for All has been processed.</p>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Monthly Impact Report</h6>
+                  <small class="text-muted">1 week ago</small>
+                </div>
+                <p class="mb-1">View how your donations made a difference this month.</p>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Tax Receipt Available</h6>
+                  <small class="text-muted">2 weeks ago</small>
+                </div>
+                <p class="mb-1">Your annual donation tax receipt is ready for download.</p>
+              </a>
+            </div>
+          </div>
+          <div class="card-footer bg-white text-center">
+            <a href="#" class="btn btn-link text-primary">View All Notifications</a>
+          </div>
+        </div>
+
         <!-- Recurring Donations -->
         <div class="card mb-4">
           <div class="card-header bg-white">

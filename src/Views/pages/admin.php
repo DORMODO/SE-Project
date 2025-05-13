@@ -1,10 +1,7 @@
 <?php
-include_once '../../Modules/Admin.php';
-
-// Initialize the Admin object
+include_once '../../Modules/Admin.php'
 $admin = new Admin();
 
-// Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Add User form submission
     if (isset($_POST['add_user'])) {
@@ -17,16 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $admin->addUser($userId, $name, $password, $userType, $email);
     }
     
-    // Delete User form submission
+ 
     if (isset($_POST['delete_user'])) {
         $username = $_POST['username'];
         
         $admin->deleteUser($username);
     }
 }
-
-// Fetch users for display (this functionality isn't in the provided Admin class)
-// In a real implementation, you would add a method to fetch all users
+ (this functionality isn't in the provided Admin class)
+//3assem
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {

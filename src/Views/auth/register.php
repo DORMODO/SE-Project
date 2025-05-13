@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <p class="text-center"> 
               <span>Already have an account?</span> 
-              <a href="auth-login-basic.html"><span>Sign in instead</span></a> 
+              <a href="login.php"><span>Sign in instead</span></a> 
             </p> 
           </div> 
         </div> 

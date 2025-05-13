@@ -63,7 +63,7 @@ class Admin extends User
         return false;
     }
 
-    public function generateReport(string $format): bool 
+    public function generateReport(string $format): bool
     {
         if ($format === 'pdf') {
         } elseif ($format === 'excel') {
@@ -138,7 +138,7 @@ class Admin extends User
     }
 
     public function verifyDonation(string $donationID): bool // not yet
-    { 
+    {
 
 
         return false;
@@ -150,7 +150,7 @@ class Admin extends User
     }
 
     public function trackDonation(string $donationId): ?Donation
-    { 
+    {
         return null;
     }
     public function refundDonation(string $donationId): bool
@@ -160,5 +160,76 @@ class Admin extends User
     public function approveUser(string $userId): bool
     { /* TODO */
         return false;
+    }
+
+    public function createNotification(int $userId, string $message): bool
+    {
+        if ($this->db->openConnection()) {
+            $query = "INSERT INTO notifications (userId, message, isRead, createdAt) 
+                      VALUES ('$userId', '$message', 0, NOW())";
+
+            if ($this->db->connection->query($query) === TRUE) {
+                return true;
+            } else {
+                echo '<script>alert("Error: ' . $this->db->connection->error . '");</script>';
+                return false;
+            }
+        }
+        return false;
+    }
+   
+    public function makeDonation(int $userId, float $amount): bool
+    {
+        if ($this->db->openConnection()) {
+            $query = "INSERT INTO donations (userId, amount, createdAt) 
+                      VALUES ('$id', '$donor_name','$email','$amount','$amount', NOW())";
+
+            if ($this->db->connection->query($query) === TRUE) {
+                // Create a notification for the donor
+                $message = "Thank you for your donation of $$amount!";
+                $this->createNotification($userId, $message);
+
+                echo '<script>alert("Donation successful!");</script>';
+                return true;
+            } else {
+                echo '<script>alert("Error: ' . $this->db->connection->error . '");</script>';
+                return false;
+            }
+        }
+        return false;
+    }
+    public function getNotifications(int $userId): array
+    {
+        if ($this->db->openConnection()) {
+            $query = "SELECT * FROM notifications WHERE userId = '$userId' ORDER BY createdAt DESC";
+            $result = $this->db->connection->query($query);
+            $notifications = [];
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $notifications[] = $row;
+                }
+            }
+            return $notifications;
+        }
+        return [];
+    }
+    public function markNotificationAsRead(int $notificationId): bool
+    {
+        if ($this->db->openConnection()) {
+            $query = "UPDATE notifications SET isRead = 1 WHERE notificationId = '$notificationId'";
+            return $this->db->connection->query($query) === TRUE;
+        }
+        return false;
+    }
+}
+
+$admin = new Admin();
+$userId = 1; // Replace with the logged-in user's ID
+$notifications = $admin->getNotifications($userId);
+
+foreach ($notifications as $notification) {
+    echo "<p>{$notification['message']} - {$notification['createdAt']}</p>";
+    if ($notification['isRead'] == 0) {
+        echo "<a href='markAsRead.php?id={$notification['notificationId']}'>Mark as Read</a>";
     }
 }

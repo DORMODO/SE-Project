@@ -1,11 +1,6 @@
-<?php
-// Include necessary files
-include_once 'EventManager.php';
-include __DIR__ . '/../Controllers/DBController.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,46 +13,47 @@ include __DIR__ . '/../Controllers/DBController.php';
         :root {
             --primary-color: #1b4332;
         }
-        
+
         body {
             background-color: #f8f9fa;
+            padding-top: 70px;
         }
-        
+
         .dashboard-header {
             background-color: var(--primary-color);
             color: white;
             padding: 2rem 0;
             margin-bottom: 2rem;
         }
-        
+
         .card {
             border: none;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 1.5rem;
         }
-        
+
         .card-header {
             background-color: var(--primary-color);
             color: white;
             border-radius: 10px 10px 0 0 !important;
         }
-        
+
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
         }
-        
+
         .btn-primary:hover {
             background-color: #15352a;
             border-color: #15352a;
         }
-        
+
         .stats-card {
             text-align: center;
             padding: 1.5rem;
         }
-        
+
         .stats-icon {
             font-size: 2rem;
             color: var(--primary-color);
@@ -65,14 +61,10 @@ include __DIR__ . '/../Controllers/DBController.php';
         }
     </style>
 </head>
+
 <body>
-    <!-- Dashboard Header -->
-    <div class="dashboard-header">
-        <div class="container">
-            <h1>Event Manager Dashboard</h1>
-            <p class="lead">Manage your events and track performance</p>
-        </div>
-    </div>
+    <!-- Navbar -->
+    <?php include_once '../assets/components/navbar.php'; ?>
 
     <!-- Main Content -->
     <div class="container">
@@ -249,13 +241,15 @@ include __DIR__ . '/../Controllers/DBController.php';
         </div>
     </div>
 
+    <!-- Footer -->
+    <?php include_once '../assets/components/footer.php'; ?>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Form validation
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('createEventForm');
-            
+
             form.addEventListener('submit', function(event) {
                 if (!form.checkValidity()) {
                     event.preventDefault();
@@ -266,4 +260,5 @@ include __DIR__ . '/../Controllers/DBController.php';
         });
     </script>
 </body>
+
 </html>
